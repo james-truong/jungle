@@ -19,11 +19,9 @@ RSpec.feature "Visitor navigates to product details page", type: :feature, js: t
 
   scenario "They see an individual product" do
     visit root_path
-    within('article.product', match: :first) do
-      all('a').first.click do
-        expect(page).to have_content("Reviews for this Product")
-      end
-    end
+    click_link("Details »", match: :first)
+    expect(page).to have_css 'section.products-show', count: 1
+    save_and_open_screenshot
 
   end
 end 
